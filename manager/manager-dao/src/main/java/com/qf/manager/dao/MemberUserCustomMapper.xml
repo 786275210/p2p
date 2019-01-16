@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qf.manager.dao.MemberUserCustomMapper" >
+  <resultMap id="BaseResultMap" type="com.qf.manager.pojo.po.MemberUser" >
+    <id column="Id" property="id" jdbcType="BIGINT" />
+    <result column="Name" property="name" jdbcType="VARCHAR" />
+    <result column="Nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="Password" property="password" jdbcType="VARCHAR" />
+    <result column="PasswordSalt" property="passwordsalt" jdbcType="VARCHAR" />
+    <result column="PayPassowrdSalt" property="paypassowrdsalt" jdbcType="VARCHAR" />
+    <result column="PayPassowrd" property="paypassowrd" jdbcType="VARCHAR" />
+    <result column="UserTypeId" property="usertypeid" jdbcType="BIGINT" />
+    <result column="UpGroupId" property="upgroupid" jdbcType="BIGINT" />
+    <result column="UpGroupExpires" property="upgroupexpires" jdbcType="TIMESTAMP" />
+    <result column="Face" property="face" jdbcType="VARCHAR" />
+    <result column="Email" property="email" jdbcType="VARCHAR" />
+    <result column="Phone" property="phone" jdbcType="VARCHAR" />
+    <result column="PhoneValid" property="phonevalid" jdbcType="INTEGER" />
+    <result column="EmailValid" property="emailvalid" jdbcType="INTEGER" />
+    <result column="CreateAt" property="createat" jdbcType="TIMESTAMP" />
+    <result column="LastLoginAt" property="lastloginat" jdbcType="TIMESTAMP" />
+    <result column="PreLoginAt" property="preloginat" jdbcType="TIMESTAMP" />
+    <result column="RegIP" property="regip" jdbcType="VARCHAR" />
+    <result column="LastLoginIP" property="lastloginip" jdbcType="VARCHAR" />
+    <result column="PreLoginIP" property="preloginip" jdbcType="VARCHAR" />
+    <result column="LoginCount" property="logincount" jdbcType="INTEGER" />
+    <result column="Score" property="score" jdbcType="BIGINT" />
+    <result column="Credit" property="credit" jdbcType="INTEGER" />
+    <result column="IsLock" property="islock" jdbcType="TINYINT" />
+    <result column="LoginErrorCount" property="loginerrorcount" jdbcType="INTEGER" />
+    <result column="LoginErrorAt" property="loginerrorat" jdbcType="TIMESTAMP" />
+    <result column="PayErrorCount" property="payerrorcount" jdbcType="INTEGER" />
+    <result column="PayErrorAt" property="payerrorat" jdbcType="TIMESTAMP" />
+    <result column="RecommendBy" property="recommendby" jdbcType="BIGINT" />
+    <result column="GradeLevel" property="gradelevel" jdbcType="INTEGER" />
+    <result column="ProvinceId" property="provinceid" jdbcType="BIGINT" />
+    <result column="CityId" property="cityid" jdbcType="BIGINT" />
+    <result column="AreaId" property="areaid" jdbcType="BIGINT" />
+    <result column="Company" property="company" jdbcType="VARCHAR" />
+    <result column="SaleNumber" property="salenumber" jdbcType="VARCHAR" />
+    <result column="SalePhoto" property="salephoto" jdbcType="VARCHAR" />
+    <result column="RealName" property="realname" jdbcType="VARCHAR" />
+    <result column="RealNameValid" property="realnamevalid" jdbcType="INTEGER" />
+    <result column="OnsiteValid" property="onsitevalid" jdbcType="INTEGER" />
+    <result column="CardNumber" property="cardnumber" jdbcType="VARCHAR" />
+    <result column="CardPhoto1" property="cardphoto1" jdbcType="VARCHAR" />
+    <result column="CardPhoto2" property="cardphoto2" jdbcType="VARCHAR" />
+    <result column="Sex" property="sex" jdbcType="TINYINT" />
+    <result column="Birthday" property="birthday" jdbcType="TIMESTAMP" />
+    <result column="Address" property="address" jdbcType="VARCHAR" />
+    <result column="UserInfoWaitValid" property="userinfowaitvalid" jdbcType="TINYINT" />
+    <result column="OtherHostingId" property="otherhostingid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, Name, Nickname, Password, PasswordSalt, PayPassowrdSalt, PayPassowrd, UserTypeId, 
+    UpGroupId, UpGroupExpires, Face, Email, Phone, PhoneValid, EmailValid, CreateAt, 
+    LastLoginAt, PreLoginAt, RegIP, LastLoginIP, PreLoginIP, LoginCount, Score, Credit, 
+    IsLock, LoginErrorCount, LoginErrorAt, PayErrorCount, PayErrorAt, RecommendBy, GradeLevel, 
+    ProvinceId, CityId, AreaId, Company, SaleNumber, SalePhoto, RealName, RealNameValid, 
+    OnsiteValid, CardNumber, CardPhoto1, CardPhoto2, Sex, Birthday, Address, UserInfoWaitValid, 
+    OtherHostingId
+  </sql>
+
+  <select id="listUsers" parameterType="com.qf.manager.pojo.dto.PageRequest" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from Member_User
+    limit #{offset},#{limit}
+  </select>
+
+  <select id="countUsers" resultType="_long">
+    select count(1)
+    from Member_User
+  </select>
+
+
+</mapper>

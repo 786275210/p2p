@@ -1,0 +1,1114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qf.manager.dao.MemberUserMapper" >
+  <resultMap id="BaseResultMap" type="com.qf.manager.pojo.po.MemberUser" >
+    <id column="Id" property="id" jdbcType="BIGINT" />
+    <result column="Name" property="name" jdbcType="VARCHAR" />
+    <result column="Nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="Password" property="password" jdbcType="VARCHAR" />
+    <result column="PasswordSalt" property="passwordsalt" jdbcType="VARCHAR" />
+    <result column="PayPassowrdSalt" property="paypassowrdsalt" jdbcType="VARCHAR" />
+    <result column="PayPassowrd" property="paypassowrd" jdbcType="VARCHAR" />
+    <result column="UserTypeId" property="usertypeid" jdbcType="BIGINT" />
+    <result column="UpGroupId" property="upgroupid" jdbcType="BIGINT" />
+    <result column="UpGroupExpires" property="upgroupexpires" jdbcType="TIMESTAMP" />
+    <result column="Face" property="face" jdbcType="VARCHAR" />
+    <result column="Email" property="email" jdbcType="VARCHAR" />
+    <result column="Phone" property="phone" jdbcType="VARCHAR" />
+    <result column="PhoneValid" property="phonevalid" jdbcType="INTEGER" />
+    <result column="EmailValid" property="emailvalid" jdbcType="INTEGER" />
+    <result column="CreateAt" property="createat" jdbcType="TIMESTAMP" />
+    <result column="LastLoginAt" property="lastloginat" jdbcType="TIMESTAMP" />
+    <result column="PreLoginAt" property="preloginat" jdbcType="TIMESTAMP" />
+    <result column="RegIP" property="regip" jdbcType="VARCHAR" />
+    <result column="LastLoginIP" property="lastloginip" jdbcType="VARCHAR" />
+    <result column="PreLoginIP" property="preloginip" jdbcType="VARCHAR" />
+    <result column="LoginCount" property="logincount" jdbcType="INTEGER" />
+    <result column="Score" property="score" jdbcType="BIGINT" />
+    <result column="Credit" property="credit" jdbcType="INTEGER" />
+    <result column="IsLock" property="islock" jdbcType="TINYINT" />
+    <result column="LoginErrorCount" property="loginerrorcount" jdbcType="INTEGER" />
+    <result column="LoginErrorAt" property="loginerrorat" jdbcType="TIMESTAMP" />
+    <result column="PayErrorCount" property="payerrorcount" jdbcType="INTEGER" />
+    <result column="PayErrorAt" property="payerrorat" jdbcType="TIMESTAMP" />
+    <result column="RecommendBy" property="recommendby" jdbcType="BIGINT" />
+    <result column="GradeLevel" property="gradelevel" jdbcType="INTEGER" />
+    <result column="ProvinceId" property="provinceid" jdbcType="BIGINT" />
+    <result column="CityId" property="cityid" jdbcType="BIGINT" />
+    <result column="AreaId" property="areaid" jdbcType="BIGINT" />
+    <result column="Company" property="company" jdbcType="VARCHAR" />
+    <result column="SaleNumber" property="salenumber" jdbcType="VARCHAR" />
+    <result column="SalePhoto" property="salephoto" jdbcType="VARCHAR" />
+    <result column="RealName" property="realname" jdbcType="VARCHAR" />
+    <result column="RealNameValid" property="realnamevalid" jdbcType="INTEGER" />
+    <result column="OnsiteValid" property="onsitevalid" jdbcType="INTEGER" />
+    <result column="CardNumber" property="cardnumber" jdbcType="VARCHAR" />
+    <result column="CardPhoto1" property="cardphoto1" jdbcType="VARCHAR" />
+    <result column="CardPhoto2" property="cardphoto2" jdbcType="VARCHAR" />
+    <result column="Sex" property="sex" jdbcType="TINYINT" />
+    <result column="Birthday" property="birthday" jdbcType="TIMESTAMP" />
+    <result column="Address" property="address" jdbcType="VARCHAR" />
+    <result column="UserInfoWaitValid" property="userinfowaitvalid" jdbcType="TINYINT" />
+    <result column="OtherHostingId" property="otherhostingid" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.qf.manager.pojo.po.MemberUserWithBLOBs" extends="BaseResultMap" >
+    <result column="SafeQuestionJson" property="safequestionjson" jdbcType="LONGVARCHAR" />
+    <result column="Signature" property="signature" jdbcType="LONGVARCHAR" />
+    <result column="RemindJson" property="remindjson" jdbcType="LONGVARCHAR" />
+    <result column="Remark" property="remark" jdbcType="LONGVARCHAR" />
+    <result column="UserInfoJson" property="userinfojson" jdbcType="LONGVARCHAR" />
+    <result column="BaseValidJson" property="basevalidjson" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Id, Name, Nickname, Password, PasswordSalt, PayPassowrdSalt, PayPassowrd, UserTypeId, 
+    UpGroupId, UpGroupExpires, Face, Email, Phone, PhoneValid, EmailValid, CreateAt, 
+    LastLoginAt, PreLoginAt, RegIP, LastLoginIP, PreLoginIP, LoginCount, Score, Credit, 
+    IsLock, LoginErrorCount, LoginErrorAt, PayErrorCount, PayErrorAt, RecommendBy, GradeLevel, 
+    ProvinceId, CityId, AreaId, Company, SaleNumber, SalePhoto, RealName, RealNameValid, 
+    OnsiteValid, CardNumber, CardPhoto1, CardPhoto2, Sex, Birthday, Address, UserInfoWaitValid, 
+    OtherHostingId
+  </sql>
+  <sql id="Blob_Column_List" >
+    SafeQuestionJson, Signature, RemindJson, Remark, UserInfoJson, BaseValidJson
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.qf.manager.pojo.po.MemberUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from Member_User
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qf.manager.pojo.po.MemberUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from Member_User
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from Member_User
+    where Id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from Member_User
+    where Id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qf.manager.pojo.po.MemberUserExample" >
+    delete from Member_User
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qf.manager.pojo.po.MemberUserWithBLOBs" >
+    insert into Member_User (Id, Name, Nickname, 
+      Password, PasswordSalt, PayPassowrdSalt, 
+      PayPassowrd, UserTypeId, UpGroupId, 
+      UpGroupExpires, Face, Email, 
+      Phone, PhoneValid, EmailValid, 
+      CreateAt, LastLoginAt, PreLoginAt, 
+      RegIP, LastLoginIP, PreLoginIP, 
+      LoginCount, Score, Credit, 
+      IsLock, LoginErrorCount, LoginErrorAt, 
+      PayErrorCount, PayErrorAt, RecommendBy, 
+      GradeLevel, ProvinceId, CityId, 
+      AreaId, Company, SaleNumber, 
+      SalePhoto, RealName, RealNameValid, 
+      OnsiteValid, CardNumber, CardPhoto1, 
+      CardPhoto2, Sex, Birthday, 
+      Address, UserInfoWaitValid, OtherHostingId, 
+      SafeQuestionJson, Signature, RemindJson, 
+      Remark, UserInfoJson, BaseValidJson
+      )
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{passwordsalt,jdbcType=VARCHAR}, #{paypassowrdsalt,jdbcType=VARCHAR}, 
+      #{paypassowrd,jdbcType=VARCHAR}, #{usertypeid,jdbcType=BIGINT}, #{upgroupid,jdbcType=BIGINT}, 
+      #{upgroupexpires,jdbcType=TIMESTAMP}, #{face,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{phonevalid,jdbcType=INTEGER}, #{emailvalid,jdbcType=INTEGER}, 
+      #{createat,jdbcType=TIMESTAMP}, #{lastloginat,jdbcType=TIMESTAMP}, #{preloginat,jdbcType=TIMESTAMP}, 
+      #{regip,jdbcType=VARCHAR}, #{lastloginip,jdbcType=VARCHAR}, #{preloginip,jdbcType=VARCHAR}, 
+      #{logincount,jdbcType=INTEGER}, #{score,jdbcType=BIGINT}, #{credit,jdbcType=INTEGER}, 
+      #{islock,jdbcType=TINYINT}, #{loginerrorcount,jdbcType=INTEGER}, #{loginerrorat,jdbcType=TIMESTAMP}, 
+      #{payerrorcount,jdbcType=INTEGER}, #{payerrorat,jdbcType=TIMESTAMP}, #{recommendby,jdbcType=BIGINT}, 
+      #{gradelevel,jdbcType=INTEGER}, #{provinceid,jdbcType=BIGINT}, #{cityid,jdbcType=BIGINT}, 
+      #{areaid,jdbcType=BIGINT}, #{company,jdbcType=VARCHAR}, #{salenumber,jdbcType=VARCHAR}, 
+      #{salephoto,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR}, #{realnamevalid,jdbcType=INTEGER}, 
+      #{onsitevalid,jdbcType=INTEGER}, #{cardnumber,jdbcType=VARCHAR}, #{cardphoto1,jdbcType=VARCHAR}, 
+      #{cardphoto2,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, #{birthday,jdbcType=TIMESTAMP}, 
+      #{address,jdbcType=VARCHAR}, #{userinfowaitvalid,jdbcType=TINYINT}, #{otherhostingid,jdbcType=VARCHAR}, 
+      #{safequestionjson,jdbcType=LONGVARCHAR}, #{signature,jdbcType=LONGVARCHAR}, #{remindjson,jdbcType=LONGVARCHAR}, 
+      #{remark,jdbcType=LONGVARCHAR}, #{userinfojson,jdbcType=LONGVARCHAR}, #{basevalidjson,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qf.manager.pojo.po.MemberUserWithBLOBs" >
+    insert into Member_User
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="name != null" >
+        Name,
+      </if>
+      <if test="nickname != null" >
+        Nickname,
+      </if>
+      <if test="password != null" >
+        Password,
+      </if>
+      <if test="passwordsalt != null" >
+        PasswordSalt,
+      </if>
+      <if test="paypassowrdsalt != null" >
+        PayPassowrdSalt,
+      </if>
+      <if test="paypassowrd != null" >
+        PayPassowrd,
+      </if>
+      <if test="usertypeid != null" >
+        UserTypeId,
+      </if>
+      <if test="upgroupid != null" >
+        UpGroupId,
+      </if>
+      <if test="upgroupexpires != null" >
+        UpGroupExpires,
+      </if>
+      <if test="face != null" >
+        Face,
+      </if>
+      <if test="email != null" >
+        Email,
+      </if>
+      <if test="phone != null" >
+        Phone,
+      </if>
+      <if test="phonevalid != null" >
+        PhoneValid,
+      </if>
+      <if test="emailvalid != null" >
+        EmailValid,
+      </if>
+      <if test="createat != null" >
+        CreateAt,
+      </if>
+      <if test="lastloginat != null" >
+        LastLoginAt,
+      </if>
+      <if test="preloginat != null" >
+        PreLoginAt,
+      </if>
+      <if test="regip != null" >
+        RegIP,
+      </if>
+      <if test="lastloginip != null" >
+        LastLoginIP,
+      </if>
+      <if test="preloginip != null" >
+        PreLoginIP,
+      </if>
+      <if test="logincount != null" >
+        LoginCount,
+      </if>
+      <if test="score != null" >
+        Score,
+      </if>
+      <if test="credit != null" >
+        Credit,
+      </if>
+      <if test="islock != null" >
+        IsLock,
+      </if>
+      <if test="loginerrorcount != null" >
+        LoginErrorCount,
+      </if>
+      <if test="loginerrorat != null" >
+        LoginErrorAt,
+      </if>
+      <if test="payerrorcount != null" >
+        PayErrorCount,
+      </if>
+      <if test="payerrorat != null" >
+        PayErrorAt,
+      </if>
+      <if test="recommendby != null" >
+        RecommendBy,
+      </if>
+      <if test="gradelevel != null" >
+        GradeLevel,
+      </if>
+      <if test="provinceid != null" >
+        ProvinceId,
+      </if>
+      <if test="cityid != null" >
+        CityId,
+      </if>
+      <if test="areaid != null" >
+        AreaId,
+      </if>
+      <if test="company != null" >
+        Company,
+      </if>
+      <if test="salenumber != null" >
+        SaleNumber,
+      </if>
+      <if test="salephoto != null" >
+        SalePhoto,
+      </if>
+      <if test="realname != null" >
+        RealName,
+      </if>
+      <if test="realnamevalid != null" >
+        RealNameValid,
+      </if>
+      <if test="onsitevalid != null" >
+        OnsiteValid,
+      </if>
+      <if test="cardnumber != null" >
+        CardNumber,
+      </if>
+      <if test="cardphoto1 != null" >
+        CardPhoto1,
+      </if>
+      <if test="cardphoto2 != null" >
+        CardPhoto2,
+      </if>
+      <if test="sex != null" >
+        Sex,
+      </if>
+      <if test="birthday != null" >
+        Birthday,
+      </if>
+      <if test="address != null" >
+        Address,
+      </if>
+      <if test="userinfowaitvalid != null" >
+        UserInfoWaitValid,
+      </if>
+      <if test="otherhostingid != null" >
+        OtherHostingId,
+      </if>
+      <if test="safequestionjson != null" >
+        SafeQuestionJson,
+      </if>
+      <if test="signature != null" >
+        Signature,
+      </if>
+      <if test="remindjson != null" >
+        RemindJson,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+      <if test="userinfojson != null" >
+        UserInfoJson,
+      </if>
+      <if test="basevalidjson != null" >
+        BaseValidJson,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="passwordsalt != null" >
+        #{passwordsalt,jdbcType=VARCHAR},
+      </if>
+      <if test="paypassowrdsalt != null" >
+        #{paypassowrdsalt,jdbcType=VARCHAR},
+      </if>
+      <if test="paypassowrd != null" >
+        #{paypassowrd,jdbcType=VARCHAR},
+      </if>
+      <if test="usertypeid != null" >
+        #{usertypeid,jdbcType=BIGINT},
+      </if>
+      <if test="upgroupid != null" >
+        #{upgroupid,jdbcType=BIGINT},
+      </if>
+      <if test="upgroupexpires != null" >
+        #{upgroupexpires,jdbcType=TIMESTAMP},
+      </if>
+      <if test="face != null" >
+        #{face,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="phonevalid != null" >
+        #{phonevalid,jdbcType=INTEGER},
+      </if>
+      <if test="emailvalid != null" >
+        #{emailvalid,jdbcType=INTEGER},
+      </if>
+      <if test="createat != null" >
+        #{createat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastloginat != null" >
+        #{lastloginat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="preloginat != null" >
+        #{preloginat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regip != null" >
+        #{regip,jdbcType=VARCHAR},
+      </if>
+      <if test="lastloginip != null" >
+        #{lastloginip,jdbcType=VARCHAR},
+      </if>
+      <if test="preloginip != null" >
+        #{preloginip,jdbcType=VARCHAR},
+      </if>
+      <if test="logincount != null" >
+        #{logincount,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=BIGINT},
+      </if>
+      <if test="credit != null" >
+        #{credit,jdbcType=INTEGER},
+      </if>
+      <if test="islock != null" >
+        #{islock,jdbcType=TINYINT},
+      </if>
+      <if test="loginerrorcount != null" >
+        #{loginerrorcount,jdbcType=INTEGER},
+      </if>
+      <if test="loginerrorat != null" >
+        #{loginerrorat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payerrorcount != null" >
+        #{payerrorcount,jdbcType=INTEGER},
+      </if>
+      <if test="payerrorat != null" >
+        #{payerrorat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recommendby != null" >
+        #{recommendby,jdbcType=BIGINT},
+      </if>
+      <if test="gradelevel != null" >
+        #{gradelevel,jdbcType=INTEGER},
+      </if>
+      <if test="provinceid != null" >
+        #{provinceid,jdbcType=BIGINT},
+      </if>
+      <if test="cityid != null" >
+        #{cityid,jdbcType=BIGINT},
+      </if>
+      <if test="areaid != null" >
+        #{areaid,jdbcType=BIGINT},
+      </if>
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="salenumber != null" >
+        #{salenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="salephoto != null" >
+        #{salephoto,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null" >
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="realnamevalid != null" >
+        #{realnamevalid,jdbcType=INTEGER},
+      </if>
+      <if test="onsitevalid != null" >
+        #{onsitevalid,jdbcType=INTEGER},
+      </if>
+      <if test="cardnumber != null" >
+        #{cardnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="cardphoto1 != null" >
+        #{cardphoto1,jdbcType=VARCHAR},
+      </if>
+      <if test="cardphoto2 != null" >
+        #{cardphoto2,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="userinfowaitvalid != null" >
+        #{userinfowaitvalid,jdbcType=TINYINT},
+      </if>
+      <if test="otherhostingid != null" >
+        #{otherhostingid,jdbcType=VARCHAR},
+      </if>
+      <if test="safequestionjson != null" >
+        #{safequestionjson,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="signature != null" >
+        #{signature,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="remindjson != null" >
+        #{remindjson,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="userinfojson != null" >
+        #{userinfojson,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="basevalidjson != null" >
+        #{basevalidjson,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qf.manager.pojo.po.MemberUserExample" resultType="java.lang.Integer" >
+    select count(*) from Member_User
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update Member_User
+    <set >
+      <if test="record.id != null" >
+        Id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        Name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickname != null" >
+        Nickname = #{record.nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        Password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passwordsalt != null" >
+        PasswordSalt = #{record.passwordsalt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paypassowrdsalt != null" >
+        PayPassowrdSalt = #{record.paypassowrdsalt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paypassowrd != null" >
+        PayPassowrd = #{record.paypassowrd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usertypeid != null" >
+        UserTypeId = #{record.usertypeid,jdbcType=BIGINT},
+      </if>
+      <if test="record.upgroupid != null" >
+        UpGroupId = #{record.upgroupid,jdbcType=BIGINT},
+      </if>
+      <if test="record.upgroupexpires != null" >
+        UpGroupExpires = #{record.upgroupexpires,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.face != null" >
+        Face = #{record.face,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        Email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        Phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phonevalid != null" >
+        PhoneValid = #{record.phonevalid,jdbcType=INTEGER},
+      </if>
+      <if test="record.emailvalid != null" >
+        EmailValid = #{record.emailvalid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createat != null" >
+        CreateAt = #{record.createat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastloginat != null" >
+        LastLoginAt = #{record.lastloginat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.preloginat != null" >
+        PreLoginAt = #{record.preloginat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.regip != null" >
+        RegIP = #{record.regip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastloginip != null" >
+        LastLoginIP = #{record.lastloginip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.preloginip != null" >
+        PreLoginIP = #{record.preloginip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logincount != null" >
+        LoginCount = #{record.logincount,jdbcType=INTEGER},
+      </if>
+      <if test="record.score != null" >
+        Score = #{record.score,jdbcType=BIGINT},
+      </if>
+      <if test="record.credit != null" >
+        Credit = #{record.credit,jdbcType=INTEGER},
+      </if>
+      <if test="record.islock != null" >
+        IsLock = #{record.islock,jdbcType=TINYINT},
+      </if>
+      <if test="record.loginerrorcount != null" >
+        LoginErrorCount = #{record.loginerrorcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.loginerrorat != null" >
+        LoginErrorAt = #{record.loginerrorat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.payerrorcount != null" >
+        PayErrorCount = #{record.payerrorcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.payerrorat != null" >
+        PayErrorAt = #{record.payerrorat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.recommendby != null" >
+        RecommendBy = #{record.recommendby,jdbcType=BIGINT},
+      </if>
+      <if test="record.gradelevel != null" >
+        GradeLevel = #{record.gradelevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.provinceid != null" >
+        ProvinceId = #{record.provinceid,jdbcType=BIGINT},
+      </if>
+      <if test="record.cityid != null" >
+        CityId = #{record.cityid,jdbcType=BIGINT},
+      </if>
+      <if test="record.areaid != null" >
+        AreaId = #{record.areaid,jdbcType=BIGINT},
+      </if>
+      <if test="record.company != null" >
+        Company = #{record.company,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salenumber != null" >
+        SaleNumber = #{record.salenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salephoto != null" >
+        SalePhoto = #{record.salephoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realname != null" >
+        RealName = #{record.realname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realnamevalid != null" >
+        RealNameValid = #{record.realnamevalid,jdbcType=INTEGER},
+      </if>
+      <if test="record.onsitevalid != null" >
+        OnsiteValid = #{record.onsitevalid,jdbcType=INTEGER},
+      </if>
+      <if test="record.cardnumber != null" >
+        CardNumber = #{record.cardnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardphoto1 != null" >
+        CardPhoto1 = #{record.cardphoto1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardphoto2 != null" >
+        CardPhoto2 = #{record.cardphoto2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        Sex = #{record.sex,jdbcType=TINYINT},
+      </if>
+      <if test="record.birthday != null" >
+        Birthday = #{record.birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.address != null" >
+        Address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userinfowaitvalid != null" >
+        UserInfoWaitValid = #{record.userinfowaitvalid,jdbcType=TINYINT},
+      </if>
+      <if test="record.otherhostingid != null" >
+        OtherHostingId = #{record.otherhostingid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.safequestionjson != null" >
+        SafeQuestionJson = #{record.safequestionjson,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.signature != null" >
+        Signature = #{record.signature,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.remindjson != null" >
+        RemindJson = #{record.remindjson,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        Remark = #{record.remark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.userinfojson != null" >
+        UserInfoJson = #{record.userinfojson,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.basevalidjson != null" >
+        BaseValidJson = #{record.basevalidjson,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update Member_User
+    set Id = #{record.id,jdbcType=BIGINT},
+      Name = #{record.name,jdbcType=VARCHAR},
+      Nickname = #{record.nickname,jdbcType=VARCHAR},
+      Password = #{record.password,jdbcType=VARCHAR},
+      PasswordSalt = #{record.passwordsalt,jdbcType=VARCHAR},
+      PayPassowrdSalt = #{record.paypassowrdsalt,jdbcType=VARCHAR},
+      PayPassowrd = #{record.paypassowrd,jdbcType=VARCHAR},
+      UserTypeId = #{record.usertypeid,jdbcType=BIGINT},
+      UpGroupId = #{record.upgroupid,jdbcType=BIGINT},
+      UpGroupExpires = #{record.upgroupexpires,jdbcType=TIMESTAMP},
+      Face = #{record.face,jdbcType=VARCHAR},
+      Email = #{record.email,jdbcType=VARCHAR},
+      Phone = #{record.phone,jdbcType=VARCHAR},
+      PhoneValid = #{record.phonevalid,jdbcType=INTEGER},
+      EmailValid = #{record.emailvalid,jdbcType=INTEGER},
+      CreateAt = #{record.createat,jdbcType=TIMESTAMP},
+      LastLoginAt = #{record.lastloginat,jdbcType=TIMESTAMP},
+      PreLoginAt = #{record.preloginat,jdbcType=TIMESTAMP},
+      RegIP = #{record.regip,jdbcType=VARCHAR},
+      LastLoginIP = #{record.lastloginip,jdbcType=VARCHAR},
+      PreLoginIP = #{record.preloginip,jdbcType=VARCHAR},
+      LoginCount = #{record.logincount,jdbcType=INTEGER},
+      Score = #{record.score,jdbcType=BIGINT},
+      Credit = #{record.credit,jdbcType=INTEGER},
+      IsLock = #{record.islock,jdbcType=TINYINT},
+      LoginErrorCount = #{record.loginerrorcount,jdbcType=INTEGER},
+      LoginErrorAt = #{record.loginerrorat,jdbcType=TIMESTAMP},
+      PayErrorCount = #{record.payerrorcount,jdbcType=INTEGER},
+      PayErrorAt = #{record.payerrorat,jdbcType=TIMESTAMP},
+      RecommendBy = #{record.recommendby,jdbcType=BIGINT},
+      GradeLevel = #{record.gradelevel,jdbcType=INTEGER},
+      ProvinceId = #{record.provinceid,jdbcType=BIGINT},
+      CityId = #{record.cityid,jdbcType=BIGINT},
+      AreaId = #{record.areaid,jdbcType=BIGINT},
+      Company = #{record.company,jdbcType=VARCHAR},
+      SaleNumber = #{record.salenumber,jdbcType=VARCHAR},
+      SalePhoto = #{record.salephoto,jdbcType=VARCHAR},
+      RealName = #{record.realname,jdbcType=VARCHAR},
+      RealNameValid = #{record.realnamevalid,jdbcType=INTEGER},
+      OnsiteValid = #{record.onsitevalid,jdbcType=INTEGER},
+      CardNumber = #{record.cardnumber,jdbcType=VARCHAR},
+      CardPhoto1 = #{record.cardphoto1,jdbcType=VARCHAR},
+      CardPhoto2 = #{record.cardphoto2,jdbcType=VARCHAR},
+      Sex = #{record.sex,jdbcType=TINYINT},
+      Birthday = #{record.birthday,jdbcType=TIMESTAMP},
+      Address = #{record.address,jdbcType=VARCHAR},
+      UserInfoWaitValid = #{record.userinfowaitvalid,jdbcType=TINYINT},
+      OtherHostingId = #{record.otherhostingid,jdbcType=VARCHAR},
+      SafeQuestionJson = #{record.safequestionjson,jdbcType=LONGVARCHAR},
+      Signature = #{record.signature,jdbcType=LONGVARCHAR},
+      RemindJson = #{record.remindjson,jdbcType=LONGVARCHAR},
+      Remark = #{record.remark,jdbcType=LONGVARCHAR},
+      UserInfoJson = #{record.userinfojson,jdbcType=LONGVARCHAR},
+      BaseValidJson = #{record.basevalidjson,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update Member_User
+    set Id = #{record.id,jdbcType=BIGINT},
+      Name = #{record.name,jdbcType=VARCHAR},
+      Nickname = #{record.nickname,jdbcType=VARCHAR},
+      Password = #{record.password,jdbcType=VARCHAR},
+      PasswordSalt = #{record.passwordsalt,jdbcType=VARCHAR},
+      PayPassowrdSalt = #{record.paypassowrdsalt,jdbcType=VARCHAR},
+      PayPassowrd = #{record.paypassowrd,jdbcType=VARCHAR},
+      UserTypeId = #{record.usertypeid,jdbcType=BIGINT},
+      UpGroupId = #{record.upgroupid,jdbcType=BIGINT},
+      UpGroupExpires = #{record.upgroupexpires,jdbcType=TIMESTAMP},
+      Face = #{record.face,jdbcType=VARCHAR},
+      Email = #{record.email,jdbcType=VARCHAR},
+      Phone = #{record.phone,jdbcType=VARCHAR},
+      PhoneValid = #{record.phonevalid,jdbcType=INTEGER},
+      EmailValid = #{record.emailvalid,jdbcType=INTEGER},
+      CreateAt = #{record.createat,jdbcType=TIMESTAMP},
+      LastLoginAt = #{record.lastloginat,jdbcType=TIMESTAMP},
+      PreLoginAt = #{record.preloginat,jdbcType=TIMESTAMP},
+      RegIP = #{record.regip,jdbcType=VARCHAR},
+      LastLoginIP = #{record.lastloginip,jdbcType=VARCHAR},
+      PreLoginIP = #{record.preloginip,jdbcType=VARCHAR},
+      LoginCount = #{record.logincount,jdbcType=INTEGER},
+      Score = #{record.score,jdbcType=BIGINT},
+      Credit = #{record.credit,jdbcType=INTEGER},
+      IsLock = #{record.islock,jdbcType=TINYINT},
+      LoginErrorCount = #{record.loginerrorcount,jdbcType=INTEGER},
+      LoginErrorAt = #{record.loginerrorat,jdbcType=TIMESTAMP},
+      PayErrorCount = #{record.payerrorcount,jdbcType=INTEGER},
+      PayErrorAt = #{record.payerrorat,jdbcType=TIMESTAMP},
+      RecommendBy = #{record.recommendby,jdbcType=BIGINT},
+      GradeLevel = #{record.gradelevel,jdbcType=INTEGER},
+      ProvinceId = #{record.provinceid,jdbcType=BIGINT},
+      CityId = #{record.cityid,jdbcType=BIGINT},
+      AreaId = #{record.areaid,jdbcType=BIGINT},
+      Company = #{record.company,jdbcType=VARCHAR},
+      SaleNumber = #{record.salenumber,jdbcType=VARCHAR},
+      SalePhoto = #{record.salephoto,jdbcType=VARCHAR},
+      RealName = #{record.realname,jdbcType=VARCHAR},
+      RealNameValid = #{record.realnamevalid,jdbcType=INTEGER},
+      OnsiteValid = #{record.onsitevalid,jdbcType=INTEGER},
+      CardNumber = #{record.cardnumber,jdbcType=VARCHAR},
+      CardPhoto1 = #{record.cardphoto1,jdbcType=VARCHAR},
+      CardPhoto2 = #{record.cardphoto2,jdbcType=VARCHAR},
+      Sex = #{record.sex,jdbcType=TINYINT},
+      Birthday = #{record.birthday,jdbcType=TIMESTAMP},
+      Address = #{record.address,jdbcType=VARCHAR},
+      UserInfoWaitValid = #{record.userinfowaitvalid,jdbcType=TINYINT},
+      OtherHostingId = #{record.otherhostingid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qf.manager.pojo.po.MemberUserWithBLOBs" >
+    update Member_User
+    <set >
+      <if test="name != null" >
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        Nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        Password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="passwordsalt != null" >
+        PasswordSalt = #{passwordsalt,jdbcType=VARCHAR},
+      </if>
+      <if test="paypassowrdsalt != null" >
+        PayPassowrdSalt = #{paypassowrdsalt,jdbcType=VARCHAR},
+      </if>
+      <if test="paypassowrd != null" >
+        PayPassowrd = #{paypassowrd,jdbcType=VARCHAR},
+      </if>
+      <if test="usertypeid != null" >
+        UserTypeId = #{usertypeid,jdbcType=BIGINT},
+      </if>
+      <if test="upgroupid != null" >
+        UpGroupId = #{upgroupid,jdbcType=BIGINT},
+      </if>
+      <if test="upgroupexpires != null" >
+        UpGroupExpires = #{upgroupexpires,jdbcType=TIMESTAMP},
+      </if>
+      <if test="face != null" >
+        Face = #{face,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        Email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        Phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="phonevalid != null" >
+        PhoneValid = #{phonevalid,jdbcType=INTEGER},
+      </if>
+      <if test="emailvalid != null" >
+        EmailValid = #{emailvalid,jdbcType=INTEGER},
+      </if>
+      <if test="createat != null" >
+        CreateAt = #{createat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastloginat != null" >
+        LastLoginAt = #{lastloginat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="preloginat != null" >
+        PreLoginAt = #{preloginat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regip != null" >
+        RegIP = #{regip,jdbcType=VARCHAR},
+      </if>
+      <if test="lastloginip != null" >
+        LastLoginIP = #{lastloginip,jdbcType=VARCHAR},
+      </if>
+      <if test="preloginip != null" >
+        PreLoginIP = #{preloginip,jdbcType=VARCHAR},
+      </if>
+      <if test="logincount != null" >
+        LoginCount = #{logincount,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        Score = #{score,jdbcType=BIGINT},
+      </if>
+      <if test="credit != null" >
+        Credit = #{credit,jdbcType=INTEGER},
+      </if>
+      <if test="islock != null" >
+        IsLock = #{islock,jdbcType=TINYINT},
+      </if>
+      <if test="loginerrorcount != null" >
+        LoginErrorCount = #{loginerrorcount,jdbcType=INTEGER},
+      </if>
+      <if test="loginerrorat != null" >
+        LoginErrorAt = #{loginerrorat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payerrorcount != null" >
+        PayErrorCount = #{payerrorcount,jdbcType=INTEGER},
+      </if>
+      <if test="payerrorat != null" >
+        PayErrorAt = #{payerrorat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recommendby != null" >
+        RecommendBy = #{recommendby,jdbcType=BIGINT},
+      </if>
+      <if test="gradelevel != null" >
+        GradeLevel = #{gradelevel,jdbcType=INTEGER},
+      </if>
+      <if test="provinceid != null" >
+        ProvinceId = #{provinceid,jdbcType=BIGINT},
+      </if>
+      <if test="cityid != null" >
+        CityId = #{cityid,jdbcType=BIGINT},
+      </if>
+      <if test="areaid != null" >
+        AreaId = #{areaid,jdbcType=BIGINT},
+      </if>
+      <if test="company != null" >
+        Company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="salenumber != null" >
+        SaleNumber = #{salenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="salephoto != null" >
+        SalePhoto = #{salephoto,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null" >
+        RealName = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="realnamevalid != null" >
+        RealNameValid = #{realnamevalid,jdbcType=INTEGER},
+      </if>
+      <if test="onsitevalid != null" >
+        OnsiteValid = #{onsitevalid,jdbcType=INTEGER},
+      </if>
+      <if test="cardnumber != null" >
+        CardNumber = #{cardnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="cardphoto1 != null" >
+        CardPhoto1 = #{cardphoto1,jdbcType=VARCHAR},
+      </if>
+      <if test="cardphoto2 != null" >
+        CardPhoto2 = #{cardphoto2,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        Sex = #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="birthday != null" >
+        Birthday = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="address != null" >
+        Address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="userinfowaitvalid != null" >
+        UserInfoWaitValid = #{userinfowaitvalid,jdbcType=TINYINT},
+      </if>
+      <if test="otherhostingid != null" >
+        OtherHostingId = #{otherhostingid,jdbcType=VARCHAR},
+      </if>
+      <if test="safequestionjson != null" >
+        SafeQuestionJson = #{safequestionjson,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="signature != null" >
+        Signature = #{signature,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="remindjson != null" >
+        RemindJson = #{remindjson,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="userinfojson != null" >
+        UserInfoJson = #{userinfojson,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="basevalidjson != null" >
+        BaseValidJson = #{basevalidjson,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.qf.manager.pojo.po.MemberUserWithBLOBs" >
+    update Member_User
+    set Name = #{name,jdbcType=VARCHAR},
+      Nickname = #{nickname,jdbcType=VARCHAR},
+      Password = #{password,jdbcType=VARCHAR},
+      PasswordSalt = #{passwordsalt,jdbcType=VARCHAR},
+      PayPassowrdSalt = #{paypassowrdsalt,jdbcType=VARCHAR},
+      PayPassowrd = #{paypassowrd,jdbcType=VARCHAR},
+      UserTypeId = #{usertypeid,jdbcType=BIGINT},
+      UpGroupId = #{upgroupid,jdbcType=BIGINT},
+      UpGroupExpires = #{upgroupexpires,jdbcType=TIMESTAMP},
+      Face = #{face,jdbcType=VARCHAR},
+      Email = #{email,jdbcType=VARCHAR},
+      Phone = #{phone,jdbcType=VARCHAR},
+      PhoneValid = #{phonevalid,jdbcType=INTEGER},
+      EmailValid = #{emailvalid,jdbcType=INTEGER},
+      CreateAt = #{createat,jdbcType=TIMESTAMP},
+      LastLoginAt = #{lastloginat,jdbcType=TIMESTAMP},
+      PreLoginAt = #{preloginat,jdbcType=TIMESTAMP},
+      RegIP = #{regip,jdbcType=VARCHAR},
+      LastLoginIP = #{lastloginip,jdbcType=VARCHAR},
+      PreLoginIP = #{preloginip,jdbcType=VARCHAR},
+      LoginCount = #{logincount,jdbcType=INTEGER},
+      Score = #{score,jdbcType=BIGINT},
+      Credit = #{credit,jdbcType=INTEGER},
+      IsLock = #{islock,jdbcType=TINYINT},
+      LoginErrorCount = #{loginerrorcount,jdbcType=INTEGER},
+      LoginErrorAt = #{loginerrorat,jdbcType=TIMESTAMP},
+      PayErrorCount = #{payerrorcount,jdbcType=INTEGER},
+      PayErrorAt = #{payerrorat,jdbcType=TIMESTAMP},
+      RecommendBy = #{recommendby,jdbcType=BIGINT},
+      GradeLevel = #{gradelevel,jdbcType=INTEGER},
+      ProvinceId = #{provinceid,jdbcType=BIGINT},
+      CityId = #{cityid,jdbcType=BIGINT},
+      AreaId = #{areaid,jdbcType=BIGINT},
+      Company = #{company,jdbcType=VARCHAR},
+      SaleNumber = #{salenumber,jdbcType=VARCHAR},
+      SalePhoto = #{salephoto,jdbcType=VARCHAR},
+      RealName = #{realname,jdbcType=VARCHAR},
+      RealNameValid = #{realnamevalid,jdbcType=INTEGER},
+      OnsiteValid = #{onsitevalid,jdbcType=INTEGER},
+      CardNumber = #{cardnumber,jdbcType=VARCHAR},
+      CardPhoto1 = #{cardphoto1,jdbcType=VARCHAR},
+      CardPhoto2 = #{cardphoto2,jdbcType=VARCHAR},
+      Sex = #{sex,jdbcType=TINYINT},
+      Birthday = #{birthday,jdbcType=TIMESTAMP},
+      Address = #{address,jdbcType=VARCHAR},
+      UserInfoWaitValid = #{userinfowaitvalid,jdbcType=TINYINT},
+      OtherHostingId = #{otherhostingid,jdbcType=VARCHAR},
+      SafeQuestionJson = #{safequestionjson,jdbcType=LONGVARCHAR},
+      Signature = #{signature,jdbcType=LONGVARCHAR},
+      RemindJson = #{remindjson,jdbcType=LONGVARCHAR},
+      Remark = #{remark,jdbcType=LONGVARCHAR},
+      UserInfoJson = #{userinfojson,jdbcType=LONGVARCHAR},
+      BaseValidJson = #{basevalidjson,jdbcType=LONGVARCHAR}
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qf.manager.pojo.po.MemberUser" >
+    update Member_User
+    set Name = #{name,jdbcType=VARCHAR},
+      Nickname = #{nickname,jdbcType=VARCHAR},
+      Password = #{password,jdbcType=VARCHAR},
+      PasswordSalt = #{passwordsalt,jdbcType=VARCHAR},
+      PayPassowrdSalt = #{paypassowrdsalt,jdbcType=VARCHAR},
+      PayPassowrd = #{paypassowrd,jdbcType=VARCHAR},
+      UserTypeId = #{usertypeid,jdbcType=BIGINT},
+      UpGroupId = #{upgroupid,jdbcType=BIGINT},
+      UpGroupExpires = #{upgroupexpires,jdbcType=TIMESTAMP},
+      Face = #{face,jdbcType=VARCHAR},
+      Email = #{email,jdbcType=VARCHAR},
+      Phone = #{phone,jdbcType=VARCHAR},
+      PhoneValid = #{phonevalid,jdbcType=INTEGER},
+      EmailValid = #{emailvalid,jdbcType=INTEGER},
+      CreateAt = #{createat,jdbcType=TIMESTAMP},
+      LastLoginAt = #{lastloginat,jdbcType=TIMESTAMP},
+      PreLoginAt = #{preloginat,jdbcType=TIMESTAMP},
+      RegIP = #{regip,jdbcType=VARCHAR},
+      LastLoginIP = #{lastloginip,jdbcType=VARCHAR},
+      PreLoginIP = #{preloginip,jdbcType=VARCHAR},
+      LoginCount = #{logincount,jdbcType=INTEGER},
+      Score = #{score,jdbcType=BIGINT},
+      Credit = #{credit,jdbcType=INTEGER},
+      IsLock = #{islock,jdbcType=TINYINT},
+      LoginErrorCount = #{loginerrorcount,jdbcType=INTEGER},
+      LoginErrorAt = #{loginerrorat,jdbcType=TIMESTAMP},
+      PayErrorCount = #{payerrorcount,jdbcType=INTEGER},
+      PayErrorAt = #{payerrorat,jdbcType=TIMESTAMP},
+      RecommendBy = #{recommendby,jdbcType=BIGINT},
+      GradeLevel = #{gradelevel,jdbcType=INTEGER},
+      ProvinceId = #{provinceid,jdbcType=BIGINT},
+      CityId = #{cityid,jdbcType=BIGINT},
+      AreaId = #{areaid,jdbcType=BIGINT},
+      Company = #{company,jdbcType=VARCHAR},
+      SaleNumber = #{salenumber,jdbcType=VARCHAR},
+      SalePhoto = #{salephoto,jdbcType=VARCHAR},
+      RealName = #{realname,jdbcType=VARCHAR},
+      RealNameValid = #{realnamevalid,jdbcType=INTEGER},
+      OnsiteValid = #{onsitevalid,jdbcType=INTEGER},
+      CardNumber = #{cardnumber,jdbcType=VARCHAR},
+      CardPhoto1 = #{cardphoto1,jdbcType=VARCHAR},
+      CardPhoto2 = #{cardphoto2,jdbcType=VARCHAR},
+      Sex = #{sex,jdbcType=TINYINT},
+      Birthday = #{birthday,jdbcType=TIMESTAMP},
+      Address = #{address,jdbcType=VARCHAR},
+      UserInfoWaitValid = #{userinfowaitvalid,jdbcType=TINYINT},
+      OtherHostingId = #{otherhostingid,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
